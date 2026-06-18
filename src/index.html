@@ -485,11 +485,12 @@ class Component extends DCLogic {
         out.push(this.line({ text: 'about.txt   resume.pdf   projects/   snake.exe   .secret', accent: true }));
         break;
       case 'whoami':
-        push(['kyle — software dev, indie game dev, AI researcher.', 'Probably needs more coffee.']);
+        push(['kyle — software dev, indie game dev, AI engineer.', 'Builds fun software, ships enterprise systems on AWS,', 'and uses AI to ship code at-scale. Probably needs more coffee.']);
         break;
       case 'cat':
         if (arg === 'about.txt') push([
-          'I build CLI tools, ship indie games on weekends, and', 'poke at AI systems for a day job. Been coding since the', 'beige-tower era and never emotionally recovered.',
+          "Hey, I'm Kyle! I build fun software, ship enterprise-grade", 'systems on AWS, develop games in my spare time, and use', 'AI to ship code at-scale.',
+          '', 'This page is a love letter to the whimsical, wild-west', 'era of the web — of course there are easter eggs!',
         ]);
         else if (arg === '.secret' || arg === 'secret') push([
           '>> You found the secret file. <<', 'The coffee was the real treasure all along. ☕', "(if you haven't already... try the Konami code)",
