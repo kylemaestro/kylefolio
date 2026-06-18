@@ -529,7 +529,7 @@ class Component extends DCLogic {
       case 'projects':
         push([
           '1. Reddit Archiver   [open-source · 30+ ⭐]',
-          '2. Flock and Load    [closed-alpha · Steam 2025]',
+          '2. Flock and Load    [closed-alpha · Steam 2027]',
           '3. KyleFolio         [live · this site!]',
           "4. Dinner's On You   [open-source · java applets]",
           '5. j-answer          [live · AI flashcards]',
@@ -707,19 +707,19 @@ class Component extends DCLogic {
 
   renderVals() {
     const projects = [
-      { name: 'Reddit Archiver', desc: 'CLI utility for backing up saved Reddit content — comments, posts, and images. Python, Reddit API, OAuth2 authorization flow.',
-        badges: [{ text: 'OPEN-SOURCE', kind: 'os' }, { text: '30+ ⭐ ON GITHUB', kind: 'star' }],
-        links: [{ label: 'GitHub', url: 'https://github.com/', icon: '>_' }] },
-      { name: 'Flock and Load', desc: '2D action-strategy game inspired by Worms: Armageddon. Independently developed with Unity and C#. Releasing on Steam in 2025!',
-        badges: [{ text: 'CLOSED-ALPHA', kind: 'alpha' }],
-        links: [{ label: 'Steam Page', url: 'https://store.steampowered.com/' }] },
       { name: 'KyleFolio', desc: 'This website! Built with Claude Design+Code and inspired by BRB Coffee in Austin, TX.',
         badges: [{ text: 'LIVE', kind: 'live' }, { text: 'OPEN-SOURCE', kind: 'os' }],
         links: [{ label: 'GitHub', url: 'https://github.com/kylemaestro/kylefolio', icon: '>_' }] },
-      { name: "Dinner's On You", desc: '2-player versus game inspired by Asteroids, built with old-school Java Applets. Players share a keyboard to pilot spaceships, lay mines, command battleships, and destroy the enemy base.',
-        badges: [{ text: 'OPEN-SOURCE', kind: 'os' }],
+      { name: 'Flock and Load', desc: '2D action-strategy game inspired by Worms: Armageddon. Independently developed with Unity and C#. Releasing on Steam in 2027!',
+        badges: [{ text: 'CLOSED-ALPHA', kind: 'alpha' }],
+        links: [{ label: 'Steam Page', url: 'https://store.steampowered.com/' }] },
+      { name: 'Reddit Archiver', desc: 'CLI utility for backing up saved Reddit content — comments, posts, and images. Python, Reddit API, OAuth2 authorization flow.',
+        badges: [{ text: 'OPEN-SOURCE', kind: 'os' }, { text: '30+ ⭐ ON GITHUB', kind: 'star' }],
         links: [{ label: 'GitHub', url: 'https://github.com/', icon: '>_' }] },
-      { name: 'j-answer', desc: 'AI-powered flashcard and study app.',
+      { name: "Dinner's On You", desc: '2-player versus game inspired by Asteroids, built with old-school Java Applets. Players share a keyboard to pilot spaceships, lay mines, command battleships, and destroy the enemy base. Now playable in-browser!',
+        badges: [{ text: 'LIVE', kind: 'live' }, { text: 'OPEN-SOURCE', kind: 'os' }],
+        links: [{ label: 'dinners-on-you.kylemeister.dev', url: 'https://dinners-on-you.kylemeister.dev/' }, { label: 'GitHub', url: 'https://github.com/', icon: '>_' }] },
+      { name: 'j-answer', desc: 'Jeopardy! flashcard tool with vector-embedding enabled semantic search of over 550,000+ real clues from the show.',
         badges: [{ text: 'LIVE', kind: 'live' }],
         links: [{ label: 'j-answer.kylemeister.dev', url: 'https://j-answer.kylemeister.dev/' }] },
       { name: 'Codefolio', desc: 'Experimental Electron portfolio site deployed on Lightsail with the ChakraUI component library.',
