@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+<style>
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  html,body{margin:0;padding:0;background:#060a06}
+  @keyframes km-blink{0%,49%{opacity:1}50%,100%{opacity:0}}
+  @keyframes km-marquee{0%{transform:translateX(100%)}100%{transform:translateX(-100%)}}
+  @keyframes km-caution{0%{background-position:0 0}100%{background-position:64px 0}}
+  @keyframes km-btnglow{0%,100%{box-shadow:0 0 6px #36e0ff}50%{box-shadow:0 0 16px #36e0ff,0 0 26px rgba(54,224,255,0.6)}}
+  [data-retro-scroll]{scrollbar-width:auto;scrollbar-color:var(--c-accent,#2f9bff) #04100a}
+  [data-retro-scroll]::-webkit-scrollbar{width:16px;background:#04100a;border-left:1px solid var(--c-dim,#1f5896)}
+  [data-retro-scroll]::-webkit-scrollbar-track{background:#02100a;box-shadow:inset 1px 1px 0 #000}
+  [data-retro-scroll]::-webkit-scrollbar-thumb{background:var(--c-accent,#2f9bff);border:1px solid #021008;border-top-color:rgba(255,255,255,0.4);border-left-color:rgba(255,255,255,0.4);border-radius:0}
+  [data-retro-scroll]::-webkit-scrollbar-thumb:hover{background:#36e0ff}
+  [data-retro-scroll]::-webkit-scrollbar-button{display:block;height:14px;background:var(--c-dim,#1f5896);border:1px solid #021008}
+  @keyframes km-cursor{0%,49%{opacity:1}50%,100%{opacity:0}}
+  @keyframes km-bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
+  ::selection{background:var(--c-accent,#2f9bff);color:#04140a}
+  input::placeholder,textarea::placeholder{color:var(--c-dimtext,#4a7bb0)}
+  a{color:inherit}
+</style>
+</helmet>
+<div style="position:relative;min-height:100vh;width:100%;background-color:#060a06;background-image:radial-gradient(rgba(var(--c-rgb,47,155,255),0.10) 1px,transparent 1px),radial-gradient(rgba(var(--c-rgb,47,155,255),0.05) 1px,transparent 1px),linear-gradient(180deg,#08120a,#050a06);background-size:22px 22px,22px 22px,100% 100%;background-position:0 0,11px 11px,0 0;color:var(--c-text,#9fd0ff);font-family:'VT323',ui-monospace,monospace;font-size:21px;line-height:1.25;overflow-x:hidden" ref="{{ setRootRef }}">
+
+  <sc-if value="{{ scanlines }}" hint-placeholder-val="{{ true }}">
+    <div style="position:fixed;inset:0;z-index:9000;pointer-events:none;background:repeating-linear-gradient(180deg,rgba(0,0,0,0) 0px,rgba(0,0,0,0) 2px,rgba(0,0,0,0.28) 3px,rgba(0,0,0,0.28) 4px);mix-blend-mode:multiply"></div>
+    <div style="position:fixed;inset:0;z-index:9001;pointer-events:none;background:radial-gradient(120% 120% at 50% 50%,rgba(0,0,0,0) 55%,rgba(0,0,0,0.55) 100%)"></div>
+  </sc-if>
+
+  <div style="max-width:940px;margin:0 auto;padding:34px 20px 70px;position:relative;z-index:10">
+
+    <!-- ===================== BANNER ===================== -->
+    <div style="text-align:center;border:3px double var(--c-accent,#2f9bff);background:linear-gradient(180deg,rgba(11,30,17,0.9),rgba(6,16,9,0.9));padding:26px 18px 20px;box-shadow:0 0 30px rgba(var(--c-rgb,47,155,255),0.18),inset 0 0 40px rgba(var(--c-rgb,47,155,255),0.05)">
+      <div style="font-family:'Press Start 2P',monospace;font-size:9px;color:#36e0ff;letter-spacing:2px;margin-bottom:16px;text-shadow:0 0 8px rgba(54,224,255,0.7)">★ ✦ &nbsp; W E L C O M E &nbsp; T O &nbsp; M Y &nbsp; C Y B E R - H O M E P A G E &nbsp; ✦ ★</div>
+      <h1 style="font-family:'Press Start 2P',monospace;font-size:clamp(20px,4.6vw,38px);line-height:1.35;margin:0;color:var(--c-accent,#2f9bff);text-shadow:0 0 12px rgba(var(--c-rgb,47,155,255),0.7),0 0 26px rgba(var(--c-rgb,47,155,255),0.3);letter-spacing:1px">KYLE&nbsp;MEISTER</h1>
+      <div style="font-size:25px;margin-top:12px;color:var(--c-text2,#cfe9ff)">&gt; software developer · indie game dev · AI researcher_<span style="display:inline-block;width:11px;height:22px;background:var(--c-accent,#2f9bff);margin-left:2px;vertical-align:-3px;animation:km-cursor 1s step-end infinite"></span></div>
+      <div style="margin-top:16px;font-size:23px;color:#ffcc33;text-shadow:0 0 10px rgba(255,204,51,0.5);animation:km-blink 1.1s step-end infinite">★ best viewed in Netscape Navigator 4.0 @ 800×600 ★</div>
+    </div>
+
+    <!-- ===================== MARQUEE ===================== -->
+    <div style="overflow:hidden;white-space:nowrap;border:2px solid var(--c-dim,#1f5896);border-top:none;background:#04100a;padding:7px 0;font-size:23px;color:var(--c-text,#9fd0ff)">
+      <span style="display:inline-block;animation:km-marquee 22s linear infinite;padding-left:100%">✦ thanks for visiting!! ✦ this page is under eternal construction ✦ sign my guestbook below ↓ ✦ psst — try the Konami code, or type &nbsp;ssh kyle@kylemeister.dev&nbsp; ✦ no IE allowed ✦ powered by caffeine and spite ✦</span>
+    </div>
+
+    <!-- ===================== NAV ===================== -->
+    <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:6px 4px;border-top:2px dashed var(--c-dim,#1f5896);border-bottom:2px dashed var(--c-dim,#1f5896);margin:22px 0 30px;padding:10px 6px;font-size:23px">
+      <a href="#about" style="text-decoration:none;color:var(--c-text,#9fd0ff);padding:2px 12px" style-hover="color:#36e0ff;text-shadow:0 0 10px rgba(54,224,255,0.8)">[ about ]</a>
+      <span style="color:var(--c-dim,#1f5896)">|</span>
+      <a href="#projects" style="text-decoration:none;color:var(--c-text,#9fd0ff);padding:2px 12px" style-hover="color:#36e0ff;text-shadow:0 0 10px rgba(54,224,255,0.8)">[ projects ]</a>
+      <span style="color:var(--c-dim,#1f5896)">|</span>
+      <a href="#guestbook" style="text-decoration:none;color:var(--c-text,#9fd0ff);padding:2px 12px" style-hover="color:#36e0ff;text-shadow:0 0 10px rgba(54,224,255,0.8)">[ guestbook ]</a>
+      <span style="color:var(--c-dim,#1f5896)">|</span>
+      <a href="#" onClick="{{ openTerminal }}" style="text-decoration:none;color:#ff4dd2;padding:2px 12px;text-shadow:0 0 10px rgba(255,77,210,0.5)" style-hover="color:#fff">[ ▸_terminal ]</a>
+    </div>
+
+    <!-- ===================== ABOUT WINDOW ===================== -->
+    <div id="about" style="border:2px solid var(--c-accent,#2f9bff);background:rgba(9,20,12,0.92);margin-bottom:34px;box-shadow:0 0 0 1px var(--c-shadow,#06223f),0 0 26px rgba(var(--c-rgb,47,155,255),0.14)">
+      <div style="display:flex;justify-content:space-between;align-items:center;background:linear-gradient(180deg,var(--c-bar1,#1a4f86),var(--c-bar2,#0a2a52));border-bottom:2px solid var(--c-accent,#2f9bff);padding:7px 10px;font-family:'Press Start 2P',monospace;font-size:9px;color:var(--c-text2,#cfe9ff)">
+        <span style="color:var(--c-text2,#cfe9ff);text-shadow:0 0 6px rgba(var(--c-rgb,47,155,255),0.5)">▣ about_me.txt</span>
+        <span style="display:flex;gap:5px">
+          <span style="display:inline-block;width:15px;height:13px;border:1px solid var(--c-shadow,#06223f);background:var(--c-btn,#a9d4ff);text-align:center;line-height:11px;color:var(--c-shadow,#06223f)">_</span>
+          <span style="display:inline-block;width:15px;height:13px;border:1px solid var(--c-shadow,#06223f);background:var(--c-btn,#a9d4ff);text-align:center;line-height:11px;color:var(--c-shadow,#06223f)">▢</span>
+          <span style="display:inline-block;width:15px;height:13px;border:1px solid var(--c-shadow,#06223f);background:#e69f9f;text-align:center;line-height:11px;color:#3a0b0b">×</span>
+        </span>
+      </div>
+      <div style="padding:20px">
+        <div style="display:flex;gap:20px;flex-wrap:wrap;align-items:flex-start">
+          <div style="flex:none;width:150px;height:150px;border:2px solid var(--c-dim,#1f5896);background:repeating-linear-gradient(45deg,#0a1a10,#0a1a10 8px,#0c2114 8px,#0c2114 16px);display:flex;align-items:center;justify-content:center;text-align:center;color:var(--c-dimtext,#4a7bb0);font-size:14px;padding:8px">[ profile.jpg ]<br>320×320</div>
+          <div style="flex:1;min-width:240px;font-size:23px;color:var(--c-text2,#cfe9ff)">
+            <p style="margin:0 0 12px">Hey, I'm Kyle. I build command-line tools, ship indie games on weekends, and poke at AI systems for a living. I learned HTML on a beige tower in 1999 and honestly haven't emotionally moved on.</p>
+            <p style="margin:0">This page is a love letter to the old web — but every blinking pixel of it works. Hunt around. There are secrets.</p>
+          </div>
+        </div>
+        <div style="margin-top:20px;height:34px;border:1px solid #000;background:repeating-linear-gradient(45deg,#ffcc33,#ffcc33 16px,#1a1305 16px,#1a1305 32px);background-size:64px 100%;animation:km-caution 0.9s linear infinite;display:flex;align-items:center;justify-content:center">
+          <span style="background:#0a0a0a;color:#ffcc33;font-family:'Press Start 2P',monospace;font-size:10px;padding:3px 12px;border:1px solid #ffcc33;animation:km-blink 0.9s step-end infinite">⚠ UNDER CONSTRUCTION ⚠</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================== PROJECTS WINDOW ===================== -->
+    <div id="projects" style="border:2px solid var(--c-accent,#2f9bff);background:rgba(9,20,12,0.92);margin-bottom:34px;box-shadow:0 0 0 1px var(--c-shadow,#06223f),0 0 26px rgba(var(--c-rgb,47,155,255),0.14)">
+      <div style="display:flex;justify-content:space-between;align-items:center;background:linear-gradient(180deg,var(--c-bar1,#1a4f86),var(--c-bar2,#0a2a52));border-bottom:2px solid var(--c-accent,#2f9bff);padding:7px 10px;font-family:'Press Start 2P',monospace;font-size:9px">
+        <span style="color:var(--c-text2,#cfe9ff);text-shadow:0 0 6px rgba(var(--c-rgb,47,155,255),0.5)">▣ C:\projects\</span>
+        <span style="display:flex;gap:5px">
+          <span style="display:inline-block;width:15px;height:13px;border:1px solid var(--c-shadow,#06223f);background:var(--c-btn,#a9d4ff);text-align:center;line-height:11px;color:var(--c-shadow,#06223f)">_</span>
+          <span style="display:inline-block;width:15px;height:13px;border:1px solid var(--c-shadow,#06223f);background:var(--c-btn,#a9d4ff);text-align:center;line-height:11px;color:var(--c-shadow,#06223f)">▢</span>
+          <span style="display:inline-block;width:15px;height:13px;border:1px solid var(--c-shadow,#06223f);background:#e69f9f;text-align:center;line-height:11px;color:#3a0b0b">×</span>
+        </span>
+      </div>
+      <div style="padding:20px;display:grid;gap:16px;grid-template-columns:repeat(auto-fill,minmax(290px,1fr))">
+        <sc-for list="{{ projects }}" as="project" hint-placeholder-count="5">
+          <div style="border:1px solid var(--c-dim,#1f5896);background:rgba(6,14,9,0.85);padding:15px;display:flex;flex-direction:column;gap:11px;transition:transform .12s,box-shadow .12s,border-color .12s" style-hover="border-color:#36e0ff;box-shadow:0 0 18px rgba(54,224,255,0.3);transform:translateY(-3px)">
+            <div style="font-family:'Press Start 2P',monospace;font-size:13px;color:var(--c-accent,#2f9bff);line-height:1.5;text-shadow:0 0 8px rgba(var(--c-rgb,47,155,255),0.4)">{{ project.name }}</div>
+            <div style="display:flex;flex-wrap:wrap;gap:6px">
+              <sc-for list="{{ project.badges }}" as="badge" hint-placeholder-count="1">
+                <span style="{{ badge.style }}">{{ badge.text }}</span>
+              </sc-for>
+            </div>
+            <div style="font-size:21px;color:var(--c-text2,#cfe9ff);flex:1;text-wrap:pretty">{{ project.desc }}</div>
+            <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:2px">
+              <sc-for list="{{ project.links }}" as="link" hint-placeholder-count="1">
+                <a href="{{ link.url }}" target="_blank" rel="noopener" style="text-decoration:none;border:1px solid #36e0ff;color:#36e0ff;font-size:19px;padding:3px 11px;background:rgba(54,224,255,0.06);transition:transform .14s ease,background .14s,color .14s;will-change:transform" style-hover="background:#36e0ff;color:#04140a;text-shadow:none;transform:translateY(-3px) scale(1.05);animation:km-btnglow .7s ease-in-out infinite">▸ {{ link.label }}</a>
+              </sc-for>
+            </div>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+
+    <!-- ===================== GUESTBOOK WINDOW ===================== -->
+    <div id="guestbook" style="border:2px solid var(--c-accent,#2f9bff);background:rgba(9,20,12,0.92);margin-bottom:34px;box-shadow:0 0 0 1px var(--c-shadow,#06223f),0 0 26px rgba(var(--c-rgb,47,155,255),0.14)">
+      <div style="display:flex;justify-content:space-between;align-items:center;background:linear-gradient(180deg,var(--c-bar1,#1a4f86),var(--c-bar2,#0a2a52));border-bottom:2px solid var(--c-accent,#2f9bff);padding:7px 10px;font-family:'Press Start 2P',monospace;font-size:9px">
+        <span style="color:var(--c-text2,#cfe9ff);text-shadow:0 0 6px rgba(var(--c-rgb,47,155,255),0.5)">▣ guestbook.cgi</span>
+        <span style="display:flex;gap:5px">
+          <span style="display:inline-block;width:15px;height:13px;border:1px solid var(--c-shadow,#06223f);background:var(--c-btn,#a9d4ff);text-align:center;line-height:11px;color:var(--c-shadow,#06223f)">_</span>
+          <span style="display:inline-block;width:15px;height:13px;border:1px solid var(--c-shadow,#06223f);background:var(--c-btn,#a9d4ff);text-align:center;line-height:11px;color:var(--c-shadow,#06223f)">▢</span>
+          <span style="display:inline-block;width:15px;height:13px;border:1px solid var(--c-shadow,#06223f);background:#e69f9f;text-align:center;line-height:11px;color:#3a0b0b">×</span>
+        </span>
+      </div>
+      <div style="padding:20px">
+        <div style="font-size:22px;color:#ffcc33;margin-bottom:14px;animation:km-blink 1.4s step-end infinite">✎ sign my guestbook!</div>
+        <form onSubmit="{{ submitGuestbook }}" style="display:flex;flex-direction:column;gap:9px;margin-bottom:22px">
+          <div style="display:flex;gap:9px;flex-wrap:wrap">
+            <input value="{{ gbName }}" onChange="{{ onGbName }}" placeholder="your handle..." maxlength="28" style="flex:1;min-width:160px;background:#04100a;border:1px solid var(--c-dim,#1f5896);color:var(--c-text,#9fd0ff);font-family:'VT323',monospace;font-size:21px;padding:7px 10px;outline:none" style-focus="border-color:#36e0ff" />
+            <button type="submit" style="background:var(--c-accent,#2f9bff);border:1px solid var(--c-accent,#2f9bff);color:#04140a;font-family:'Press Start 2P',monospace;font-size:10px;padding:0 16px;cursor:pointer" style-hover="background:#36e0ff;border-color:#36e0ff">SIGN</button>
+          </div>
+          <textarea value="{{ gbMsg }}" onChange="{{ onGbMsg }}" placeholder="leave a message for the webmaster..." rows="2" maxlength="180" style="background:#04100a;border:1px solid var(--c-dim,#1f5896);color:var(--c-text,#9fd0ff);font-family:'VT323',monospace;font-size:21px;padding:7px 10px;outline:none;resize:vertical" style-focus="border-color:#36e0ff"></textarea>
+        </form>
+        <div style="display:flex;flex-direction:column;gap:10px">
+          <sc-for list="{{ guestbook }}" as="entry" hint-placeholder-count="3">
+            <div style="border:1px solid var(--c-dim,#1f5896);border-left:3px solid #36e0ff;background:rgba(4,16,10,0.6);padding:9px 12px">
+              <div style="display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap">
+                <span style="color:#36e0ff;font-size:21px">▸ {{ entry.name }}</span>
+                <span style="color:var(--c-dimtext,#4a7bb0);font-size:18px">{{ entry.date }}</span>
+              </div>
+              <div style="color:var(--c-text2,#cfe9ff);font-size:21px;margin-top:3px;text-wrap:pretty">{{ entry.message }}</div>
+            </div>
+          </sc-for>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===================== THEME SELECTOR ===================== -->
+    <div style="display:flex;justify-content:center;align-items:center;gap:12px;margin:0 0 34px;font-family:'Press Start 2P',monospace;font-size:9px;letter-spacing:1px">
+      <span style="color:var(--c-dimtext,#4a7bb0)">THEME</span>
+      <div style="display:flex;gap:9px">
+        <sc-for list="{{ themeButtons }}" as="t" hint-placeholder-count="4">
+          <span onClick="{{ t.onClick }}" title="{{ t.title }}" style="{{ t.style }}"></span>
+        </sc-for>
+      </div>
+    </div>
+
+    <!-- ===================== FOOTER ===================== -->
+    <div style="text-align:center;border-top:2px dashed var(--c-dim,#1f5896);padding-top:24px;margin-top:8px">
+      <div style="display:inline-block;border:2px solid #36e0ff;background:#000;padding:9px 16px;box-shadow:0 0 18px rgba(54,224,255,0.3)">
+        <div style="font-size:18px;color:var(--c-dimtext,#4a7bb0);font-family:'Press Start 2P',monospace;letter-spacing:1px;margin-bottom:5px">VISITORS</div>
+        <div style="font-family:'Press Start 2P',monospace;font-size:18px;color:#36e0ff;letter-spacing:3px;text-shadow:0 0 10px rgba(54,224,255,0.8)">{{ visitorStr }}</div>
+        <div style="font-size:18px;color:var(--c-text,#9fd0ff);margin-top:6px">you are visitor #{{ visitorStr }}</div>
+      </div>
+
+      <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:8px;margin:24px 0 18px">
+        <sc-for list="{{ badges88 }}" as="b" hint-placeholder-count="6">
+          <div style="{{ b.style }}">{{ b.text }}</div>
+        </sc-for>
+      </div>
+
+      <div style="font-size:20px;color:var(--c-text,#9fd0ff)">
+        <a href="#" onClick="{{ openTerminal }}" style="color:#ff4dd2;text-decoration:none;text-shadow:0 0 8px rgba(255,77,210,0.4)" style-hover="color:#fff">[ ▸ access_terminal ]</a>
+        &nbsp;·&nbsp;
+        <span style="color:var(--c-dimtext,#4a7bb0)">try the Konami code ↑↑↓↓←→←→ B A</span>
+      </div>
+      <div style="font-size:19px;color:var(--c-dimtext,#4a7bb0);margin-top:12px">© 1997–2026 Kyle Meister · No rights reserved, this is the internet · hand-coded in Notepad ☕</div>
+      <div style="font-size:16px;color:var(--c-dimtext,#4a7bb0);margin-top:6px">&lt;!-- there's ASCII art in the console. open devtools, nerd. --&gt;</div>
+    </div>
+  </div>
+
+  <!-- ===================== TERMINAL OVERLAY ===================== -->
+  <sc-if value="{{ terminalOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="position:fixed;inset:0;z-index:9500;background:rgba(2,6,3,0.78);display:flex;align-items:center;justify-content:center;padding:18px" onClick="{{ onBackdropClick }}">
+      <div style="width:100%;max-width:760px;height:min(68vh,480px);display:flex;flex-direction:column;border:2px solid var(--c-accent,#2f9bff);background:#030a05;box-shadow:0 0 40px rgba(var(--c-rgb,47,155,255),0.35);overflow:hidden" onClick="{{ stop }}">
+        <div style="display:flex;justify-content:space-between;align-items:center;background:linear-gradient(180deg,var(--c-bar1,#1a4f86),var(--c-bar2,#0a2a52));border-bottom:2px solid var(--c-accent,#2f9bff);padding:7px 10px;font-family:'Press Start 2P',monospace;font-size:9px;flex:none">
+          <span style="color:var(--c-text2,#cfe9ff)">▣ kyle@kylemeister.dev: ~ — bash — 80×24</span>
+          <span onClick="{{ closeTerminal }}" style="cursor:pointer;display:inline-block;width:16px;height:14px;border:1px solid #3a0b0b;background:#e69f9f;text-align:center;line-height:12px;color:#3a0b0b">×</span>
+        </div>
+
+        <div ref="{{ setLinesRef }}" data-retro-scroll="1" style="flex:1;overflow-y:auto;padding:10px 14px;font-family:'VT323',monospace;font-size:20px;line-height:1.08;color:var(--c-text,#9fd0ff);white-space:normal;word-break:break-word">
+          <sc-for list="{{ terminalLines }}" as="ln" hint-placeholder-count="0">
+            <div style="{{ ln.style }}">{{ ln.text }}</div>
+          </sc-for>
+
+          <sc-if value="{{ snakeOn }}" hint-placeholder-val="{{ false }}">
+            <div style="display:flex;flex-direction:column;align-items:center;gap:8px;padding:10px 0">
+              <canvas ref="{{ setSnakeCanvas }}" width="306" height="306" style="border:1px solid var(--c-accent,#2f9bff);background:#02160c;box-shadow:0 0 18px rgba(var(--c-rgb,47,155,255),0.25);image-rendering:pixelated"></canvas>
+              <div style="color:var(--c-dimtext,#4a7bb0);font-size:18px;text-align:center">arrow keys to move · R to restart · ESC to quit</div>
+            </div>
+          </sc-if>
+        </div>
+
+        <sc-if value="{{ shellOn }}" hint-placeholder-val="{{ true }}">
+          <div style="flex:none;display:flex;align-items:center;gap:8px;border-top:1px solid var(--c-dim,#1f5896);padding:9px 16px;font-family:'VT323',monospace;font-size:20px;background:#04100a">
+            <span style="color:var(--c-accent,#2f9bff);white-space:nowrap">kyle@kylemeister.dev:~$</span>
+            <input ref="{{ setInputRef }}" value="{{ input }}" onChange="{{ onTermChange }}" onKeyDown="{{ onTermKey }}" spellcheck="false" autocomplete="off" style="flex:1;background:transparent;border:none;outline:none;color:var(--c-text,#9fd0ff);font-family:'VT323',monospace;font-size:20px;caret-color:var(--c-accent,#2f9bff)" />
+          </div>
+        </sc-if>
+      </div>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:&quot;100%&quot;,&quot;height&quot;:&quot;100%&quot;},&quot;scanlines&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;},&quot;startingVisitorCount&quot;:{&quot;editor&quot;:&quot;int&quot;,&quot;default&quot;:42891,&quot;min&quot;:0,&quot;max&quot;:9999999,&quot;tsType&quot;:&quot;number&quot;}}">
+class Component extends DCLogic {
+  THEMES = {
+    blue:   { accent:'#2f9bff', dim:'#1f5896', text:'#9fd0ff', text2:'#cfe9ff', bar1:'#1a4f86', bar2:'#0a2a52', shadow:'#06223f', dimtext:'#4a7bb0', btn:'#a9d4ff', rgb:'47,155,255',  snakeBg:'#031426', snakeHead:'#bfe3ff', snakeBody:'#2f9bff', food:'#ff4dd2' },
+    green:  { accent:'#2bff88', dim:'#1f7a45', text:'#7dffb0', text2:'#dfffec', bar1:'#207a47', bar2:'#0b3a20', shadow:'#06340f', dimtext:'#3f8f5f', btn:'#9fe6bb', rgb:'43,255,136', snakeBg:'#02160c', snakeHead:'#9bffce', snakeBody:'#2bff88', food:'#ff4dd2' },
+    red:    { accent:'#ff5a5a', dim:'#9a3838', text:'#ffb3b3', text2:'#ffdede', bar1:'#7a2626', bar2:'#3a1010', shadow:'#3a0c0c', dimtext:'#b06a6a', btn:'#ffc6c6', rgb:'255,90,90',  snakeBg:'#1a0707', snakeHead:'#ffd2d2', snakeBody:'#ff5a5a', food:'#ffd23f' },
+    purple: { accent:'#b06bff', dim:'#5a3f9a', text:'#d4bcff', text2:'#ece0ff', bar1:'#4a2a86', bar2:'#240e4f', shadow:'#1f0a3f', dimtext:'#8a6ab0', btn:'#d6c4ff', rgb:'176,107,255', snakeBg:'#120626', snakeHead:'#e8d4ff', snakeBody:'#b06bff', food:'#ffd23f' },
+  };
+
+  state = {
+    theme: 'blue',
+    visitors: 0,
+    terminalOpen: false,
+    terminalLines: [],
+    input: '',
+    view: 'shell',
+    guestbook: [],
+    gbName: '',
+    gbMsg: '',
+  };
+
+  // ---------- lifecycle ----------
+  componentDidMount() {
+    // visitor counter
+    const base = (this.props.startingVisitorCount ?? 42891);
+    let v;
+    try {
+      const stored = parseInt(localStorage.getItem('km_visitors') || '', 10);
+      v = (isNaN(stored) ? base : Math.max(stored, base)) + 1 + Math.floor(Math.random() * 3);
+      localStorage.setItem('km_visitors', String(v));
+    } catch (e) { v = base + 7; }
+
+    // guestbook
+    let gb;
+    try { gb = JSON.parse(localStorage.getItem('km_guestbook') || 'null'); } catch (e) { gb = null; }
+    if (!Array.isArray(gb) || !gb.length) {
+      gb = [
+        { name: 'xX_DarkRider_Xx', message: 'sick site dude!! check out my geocities page sometime', date: '08/14/1998' },
+        { name: 'CyberSurfer99', message: 'FIRST!! also netscape > IE, fight me in the parking lot', date: '03/02/1999' },
+        { name: 'webmaster_tim', message: 'added u to my webring :) keep on surfin the information superhighway', date: '11/27/1998' },
+      ];
+    }
+
+    this.setState({ visitors: v, guestbook: gb, terminalLines: this.welcome() });
+
+    // keyboard
+    this._onKey = (e) => this.handleKey(e);
+    window.addEventListener('keydown', this._onKey);
+    this._kbuf = '';
+    this._konami = 0;
+    this.KONAMI = ['ArrowUp','ArrowUp','ArrowDown','ArrowDown','ArrowLeft','ArrowRight','ArrowLeft','ArrowRight','b','a'];
+
+    // theme
+    let savedTheme = 'blue';
+    try { savedTheme = localStorage.getItem('km_theme') || 'blue'; } catch (e) {}
+    this.applyTheme(savedTheme);
+
+    // ascii art in console
+    const art = [
+      '%c',
+      '   _  ____   __ _     _____   __  __ _____ ___ ____ _____ _____ ____  ',
+      "  | |/ /\\ \\ / /| |   | ____| |  \\/  | ____|_ _/ ___|_   _| ____|  _ \\ ",
+      "  | ' /  \\ V / | |   |  _|   | |\\/| |  _|  | |\\___ \\ | | |  _| | |_) |",
+      "  | . \\   | |  | |___| |___  | |  | | |___ | | ___) || | | |___|  _ < ",
+      "  |_|\\_\\  |_|  |_____|_____| |_|  |_|_____|___|____/ |_| |_____|_| \\_\\",
+      '',
+      '   you found the source. type  ssh kyle@kylemeister.dev  to come inside. ☕',
+      '',
+    ].join('\n');
+    console.log(art, 'color:#2bff88;font-family:monospace;text-shadow:0 0 8px #2bff88;');
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('keydown', this._onKey);
+    this.stopSnake();
+  }
+
+  // ---------- theme ----------
+  applyVars(name) {
+    const t = this.THEMES[name] || this.THEMES.blue;
+    const el = this.rootEl; if (!el) return;
+    const s = el.style;
+    s.setProperty('--c-accent', t.accent);
+    s.setProperty('--c-dim', t.dim);
+    s.setProperty('--c-text', t.text);
+    s.setProperty('--c-text2', t.text2);
+    s.setProperty('--c-bar1', t.bar1);
+    s.setProperty('--c-bar2', t.bar2);
+    s.setProperty('--c-shadow', t.shadow);
+    s.setProperty('--c-dimtext', t.dimtext);
+    s.setProperty('--c-btn', t.btn);
+    s.setProperty('--c-rgb', t.rgb);
+  }
+  applyTheme = (name) => {
+    if (!this.THEMES[name]) name = 'blue';
+    this._applied = name;
+    this.applyVars(name);
+    try { localStorage.setItem('km_theme', name); } catch (e) {}
+    if (this.state.theme !== name) this.setState({ theme: name });
+    if (this.ctx) this.drawSnake();
+  };
+  componentDidUpdate() { if (this.rootEl) this.applyVars(this._applied || this.state.theme); }
+  setRootRef = (n) => { this.rootEl = n; if (n) this.applyVars(this._applied || this.state.theme); };
+
+  // ---------- visitor formatting ----------
+  fmtVisitor(n) {
+    const s = String(n).padStart(8, '0');
+    return s.replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  }
+
+  // ---------- keyboard router ----------
+  handleKey(e) {
+    if (this.state.terminalOpen) {
+      if (this.state.view === 'snake') { this.snakeKey(e); return; }
+      if (e.key === 'Escape') this.closeTerminal();
+      return;
+    }
+    const tag = (e.target && e.target.tagName) || '';
+    if (tag === 'INPUT' || tag === 'TEXTAREA') return;
+
+    // konami
+    if (e.key === this.KONAMI[this._konami]) {
+      this._konami++;
+      if (this._konami === this.KONAMI.length) { this._konami = 0; this.cheat(); }
+    } else {
+      this._konami = (e.key === this.KONAMI[0]) ? 1 : 0;
+    }
+    // ssh trigger
+    if (e.key && e.key.length === 1) {
+      this._kbuf = (this._kbuf + e.key).slice(-44);
+      if (this._kbuf.replace(/\s/g, '').toLowerCase().includes('sshkyle@kylemeister.dev')) {
+        this._kbuf = '';
+        this.openTerminal(['', 'Connecting to kylemeister.dev...', 'Connection established. Welcome. ☕', '']);
+      }
+    }
+  }
+
+  // ---------- terminal open/close ----------
+  openTerminal = (extra) => {
+    if (extra && extra.preventDefault) extra.preventDefault();
+    const add = Array.isArray(extra) ? extra : [];
+    this.setState(s => ({
+      terminalOpen: true,
+      view: 'shell',
+      terminalLines: s.terminalLines.length ? [...s.terminalLines, ...add] : [...this.welcome(), ...add],
+    }));
+    setTimeout(() => { if (this.inputEl) this.inputEl.focus(); }, 60);
+  };
+
+  closeTerminal = () => {
+    this.stopSnake();
+    this.setState({ terminalOpen: false, view: 'shell' });
+  };
+
+  onBackdropClick = () => this.closeTerminal();
+  stop = (e) => { if (e && e.stopPropagation) e.stopPropagation(); };
+
+  cheat() {
+    this.openTerminal([
+      '',
+      '╔══════════════════════════════════╗',
+      '║   🎮  CHEAT MODE UNLOCKED  🎮     ║',
+      '╚══════════════════════════════════╝',
+      'Infinite coffee enabled. 30 lives granted. GG.',
+      '',
+    ]);
+  }
+
+  // ---------- refs ----------
+  setLinesRef = (n) => { this.linesEl = n; };
+  setInputRef = (n) => { this.inputEl = n; };
+  setSnakeCanvas = (n) => {
+    if (n) { this.canvas = n; this.ctx = n.getContext('2d'); this.startSnake(); }
+    else { this.stopSnake(); this.canvas = null; this.ctx = null; }
+  };
+
+  scrollDown() {
+    setTimeout(() => { if (this.linesEl) this.linesEl.scrollTop = this.linesEl.scrollHeight; }, 20);
+  }
+
+  // ---------- terminal input ----------
+  onTermChange = (e) => this.setState({ input: e.target.value });
+  onTermKey = (e) => {
+    if (e.key === 'Enter') { e.preventDefault(); this.runCommand(this.state.input); }
+  };
+
+  welcome() {
+    return [
+      { text: 'Last login: ' + new Date().toLocaleString() + ' on ttys001', dim: true },
+      { text: '' },
+      { text: ' KYLE-OS  v3.11   [ Web Edition ]', accent: true },
+      { text: " Type 'help' for a list of commands." },
+      { text: '' },
+    ].map(l => this.line(l));
+  }
+
+  line(l) {
+    if (typeof l === 'string') l = { text: l };
+    const t = this.THEMES[this.state.theme] || this.THEMES.blue;
+    let style = 'min-height:1.08em;white-space:pre-wrap';
+    if (l.dim) style += ';color:' + t.dimtext;
+    if (l.accent) style += ';color:#36e0ff;text-shadow:0 0 8px rgba(54,224,255,0.5)';
+    if (l.prompt) style += ';color:' + t.accent;
+    if (l.err) style += ';color:#ff6b6b';
+    if (l.gold) style += ';color:#ffcc33';
+    return { text: l.text, style };
+  }
+
+  runCommand(raw) {
+    const cmd = (raw || '').trim();
+    const out = [];
+    out.push(this.line({ text: 'kyle@kylemeister.dev:~$ ' + cmd, prompt: true }));
+    const [name, ...args] = cmd.split(/\s+/);
+    const arg = args.join(' ');
+
+    const push = (arr, opt) => arr.forEach(t => out.push(this.line(opt ? { ...opt, text: t } : t)));
+
+    switch ((name || '').toLowerCase()) {
+      case '': break;
+      case 'help':
+        push([
+          'Available commands:',
+          '  help        show this help',
+          '  ls          list files',
+          '  cat <file>  read a file (try: about.txt, .secret)',
+          '  whoami      who are you?',
+          '  projects    list my projects',
+          '  neofetch    system info',
+          '  coffee      brew a cup',
+          '  snake       play snake!  (arrows · R · ESC)',
+          '  social      where to find me',
+          '  clear       clear the screen',
+          '  exit        close terminal',
+        ]); break;
+      case 'ls':
+        out.push(this.line({ text: 'about.txt   resume.pdf   projects/   snake.exe   .secret', accent: true }));
+        break;
+      case 'whoami':
+        push(['kyle — software dev, indie game dev, AI researcher.', 'Probably needs more coffee.']);
+        break;
+      case 'cat':
+        if (arg === 'about.txt') push([
+          'I build CLI tools, ship indie games on weekends, and', 'poke at AI systems for a day job. Been coding since the', 'beige-tower era and never emotionally recovered.',
+        ]);
+        else if (arg === '.secret' || arg === 'secret') push([
+          '>> You found the secret file. <<', 'The coffee was the real treasure all along. ☕', "(if you haven't already... try the Konami code)",
+        ], { gold: true });
+        else if (arg === 'resume.pdf') push(['cat: resume.pdf: cannot display binary. nice try.'], { err: true });
+        else if (!arg) push(['usage: cat <file>'], { err: true });
+        else push(['cat: ' + arg + ': No such file or directory'], { err: true });
+        break;
+      case 'projects':
+        push([
+          '1. Reddit Archiver   [open-source · 30+ ⭐]',
+          '2. Flock and Load    [closed-alpha · Steam 2025]',
+          '3. Codefolio         [open-source · this site!]',
+          "4. Dinner's On You    [open-source · java applets]",
+          '5. J-Answer          [live · AI flashcards]',
+          '',
+          'scroll up on the page to see the cards.',
+        ]); break;
+      case 'neofetch':
+        push([
+          '   ___    kyle@kylemeister.dev',
+          '  |o o|   ----------------------',
+          '  | ^ |   OS:      Web95 (HTML/CSS/JS)',
+          '  |\\_/|   Shell:   bash 4.0-retro',
+          '  |___|   Uptime:  10,402 days',
+          '          CPU:     Caffeine x8 @ 4.0GHz',
+          '          Memory:  64MB / 64MB  :)',
+          '          Theme:   Phosphor Green',
+        ], { accent: true }); break;
+      case 'coffee':
+        push([
+          '       ) )',
+          '      ( (',
+          '    ........',
+          '    |      |]',
+          '    \\      /',
+          "     `----'",
+          '   ~ fresh brew ~',
+        ], { gold: true }); break;
+      case 'social':
+        push(['github   → github.com/kylemeister', 'steam    → store.steampowered.com', 'j-answer → j-answer.kylemeister.dev'], { accent: true });
+        break;
+      case 'snake':
+        out.push(this.line({ text: 'Launching snake.exe ...', gold: true }));
+        this.setState(s => ({ terminalLines: [...s.terminalLines, ...out], input: '', view: 'snake' }));
+        this.scrollDown();
+        return;
+      case 'clear':
+        this.setState({ terminalLines: [], input: '' });
+        return;
+      case 'exit':
+      case 'quit':
+      case 'logout':
+        this.closeTerminal();
+        this.setState({ input: '' });
+        return;
+      case 'sudo':
+        out.push(this.line({ text: "kyle is not in the sudoers file. This incident will be reported. 😎", err: true }));
+        break;
+      case 'rm':
+        out.push(this.line({ text: 'rm: nice try. nothing here is yours to delete.', err: true }));
+        break;
+      case 'date':
+        out.push(this.line({ text: new Date().toString() }));
+        break;
+      default:
+        out.push(this.line({ text: "command not found: " + name + " — type 'help'", err: true }));
+    }
+
+    this.setState(s => ({ terminalLines: [...s.terminalLines, ...out], input: '' }));
+    this.scrollDown();
+  }
+
+  // ---------- guestbook ----------
+  onGbName = (e) => this.setState({ gbName: e.target.value });
+  onGbMsg = (e) => this.setState({ gbMsg: e.target.value });
+  submitGuestbook = (e) => {
+    if (e && e.preventDefault) e.preventDefault();
+    const name = (this.state.gbName || '').trim() || 'anonymous_surfer';
+    const message = (this.state.gbMsg || '').trim();
+    if (!message) return;
+    const entry = { name, message, date: new Date().toLocaleDateString('en-US') };
+    const gb = [entry, ...this.state.guestbook];
+    try { localStorage.setItem('km_guestbook', JSON.stringify(gb)); } catch (err) {}
+    this.setState({ guestbook: gb, gbName: '', gbMsg: '' });
+  };
+
+  // ---------- snake ----------
+  startSnake() {
+    const G = 17;
+    this.snk = {
+      G, body: [{ x: 8, y: 8 }, { x: 7, y: 8 }, { x: 6, y: 8 }],
+      dir: { x: 1, y: 0 }, pending: { x: 1, y: 0 },
+      food: { x: 12, y: 8 }, score: 0, over: false,
+    };
+    this.placeFood();
+    this.drawSnake();
+    this.stopSnake();
+    this.snakeTimer = setInterval(() => this.tickSnake(), 115);
+  }
+  stopSnake() { if (this.snakeTimer) { clearInterval(this.snakeTimer); this.snakeTimer = null; } }
+
+  placeFood() {
+    const s = this.snk; let p;
+    do { p = { x: Math.floor(Math.random() * s.G), y: Math.floor(Math.random() * s.G) }; }
+    while (s.body.some(b => b.x === p.x && b.y === p.y));
+    s.food = p;
+  }
+
+  snakeKey(e) {
+    if (e.key === 'Escape') { this.stopSnake(); this.setState({ view: 'shell' }); setTimeout(() => this.inputEl && this.inputEl.focus(), 50); return; }
+    const s = this.snk; if (!s) return;
+    if (s.over && (e.key === 'r' || e.key === 'R')) { this.startSnake(); return; }
+    const map = { ArrowUp: { x: 0, y: -1 }, ArrowDown: { x: 0, y: 1 }, ArrowLeft: { x: -1, y: 0 }, ArrowRight: { x: 1, y: 0 } };
+    const d = map[e.key];
+    if (d) {
+      e.preventDefault();
+      if (!(d.x === -s.dir.x && d.y === -s.dir.y)) s.pending = d;
+    }
+  }
+
+  tickSnake() {
+    const s = this.snk; if (!s || s.over) return;
+    s.dir = s.pending;
+    const head = { x: s.body[0].x + s.dir.x, y: s.body[0].y + s.dir.y };
+    if (head.x < 0 || head.y < 0 || head.x >= s.G || head.y >= s.G || s.body.some(b => b.x === head.x && b.y === head.y)) {
+      s.over = true; this.stopSnake(); this.drawSnake(); return;
+    }
+    s.body.unshift(head);
+    if (head.x === s.food.x && head.y === s.food.y) { s.score += 10; this.placeFood(); }
+    else s.body.pop();
+    this.drawSnake();
+  }
+
+  drawSnake() {
+    const ctx = this.ctx, s = this.snk; if (!ctx || !s) return;
+    const T = this.THEMES[this.state.theme] || this.THEMES.blue;
+    const CELL = 18;
+    ctx.fillStyle = T.snakeBg;
+    ctx.fillRect(0, 0, 306, 306);
+    // grid
+    ctx.strokeStyle = 'rgba(' + T.rgb + ',0.08)';
+    for (let i = 0; i <= s.G; i++) {
+      ctx.beginPath(); ctx.moveTo(i * CELL, 0); ctx.lineTo(i * CELL, 306); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(0, i * CELL); ctx.lineTo(306, i * CELL); ctx.stroke();
+    }
+    // food
+    ctx.fillStyle = T.food; ctx.shadowColor = T.food; ctx.shadowBlur = 8;
+    ctx.fillRect(s.food.x * CELL + 3, s.food.y * CELL + 3, CELL - 6, CELL - 6);
+    ctx.shadowBlur = 0;
+    // snake
+    s.body.forEach((b, i) => {
+      ctx.fillStyle = i === 0 ? T.snakeHead : T.snakeBody;
+      ctx.fillRect(b.x * CELL + 1, b.y * CELL + 1, CELL - 2, CELL - 2);
+    });
+    // score
+    ctx.fillStyle = T.text; ctx.font = '16px VT323, monospace';
+    ctx.fillText('SCORE ' + s.score, 8, 18);
+    if (s.over) {
+      ctx.fillStyle = 'rgba(2,8,4,0.82)'; ctx.fillRect(0, 110, 306, 86);
+      ctx.fillStyle = '#ff6b6b'; ctx.font = "22px 'Press Start 2P', monospace";
+      ctx.textAlign = 'center'; ctx.fillText('GAME OVER', 153, 150);
+      ctx.fillStyle = T.text; ctx.font = '20px VT323, monospace';
+      ctx.fillText('press R to restart · ESC to quit', 153, 178);
+      ctx.textAlign = 'left';
+    }
+  }
+
+  // ---------- badges ----------
+  badgeStyle(kind) {
+    const base = "display:inline-block;font-family:'VT323',monospace;font-size:16px;line-height:1;letter-spacing:.5px;padding:4px 8px;border:1px solid;";
+    const m = {
+      os:    'color:#2bff88;border-color:#2bff88;background:rgba(43,255,136,0.08)',
+      live:  'color:#36e0ff;border-color:#36e0ff;background:rgba(54,224,255,0.10)',
+      alpha: 'color:#ffcc33;border-color:#ffcc33;background:rgba(255,204,51,0.10)',
+      star:  'color:#ff4dd2;border-color:#ff4dd2;background:rgba(255,77,210,0.10)',
+    };
+    return base + (m[kind] || m.os);
+  }
+
+  badge88(grad, fg, border) {
+    return 'width:88px;height:31px;flex:none;border:1px solid ' + border + ';background:' + grad +
+      ';color:' + fg + ";font-family:'VT323',monospace;font-size:15px;line-height:1;display:flex;align-items:center;justify-content:center;text-align:center;padding:3px;letter-spacing:.3px";
+  }
+
+  renderVals() {
+    const projects = [
+      { name: 'Reddit Archiver', desc: 'CLI utility for backing up saved Reddit content — comments, posts, and images. Python, Reddit API, OAuth2 authorization flow.',
+        badges: [{ text: 'OPEN-SOURCE', kind: 'os' }, { text: '30+ ⭐ ON GITHUB', kind: 'star' }],
+        links: [{ label: 'GitHub', url: 'https://github.com/' }] },
+      { name: 'Flock and Load', desc: '2D action-strategy game inspired by Worms: Armageddon. Independently developed with Unity and C#. Releasing on Steam in 2025!',
+        badges: [{ text: 'CLOSED-ALPHA', kind: 'alpha' }],
+        links: [{ label: 'Steam Page', url: 'https://store.steampowered.com/' }] },
+      { name: 'Codefolio', desc: 'This website! Built with React and Electron, hosted on a lightweight AWS Lightsail instance.',
+        badges: [{ text: 'OPEN-SOURCE', kind: 'os' }],
+        links: [{ label: 'GitHub', url: 'https://github.com/' }, { label: 'Setup Guide', url: '#' }] },
+      { name: "Dinner's On You", desc: '2-player versus game inspired by Asteroids, built with old-school Java Applets. Players share a keyboard to pilot spaceships, lay mines, command battleships, and destroy the enemy base.',
+        badges: [{ text: 'OPEN-SOURCE', kind: 'os' }],
+        links: [{ label: 'GitHub', url: 'https://github.com/' }] },
+      { name: 'J-Answer', desc: 'AI-powered flashcard and study app.',
+        badges: [{ text: 'LIVE', kind: 'live' }],
+        links: [{ label: 'j-answer.kylemeister.dev', url: 'https://j-answer.kylemeister.dev/' }] },
+    ].map(p => ({ ...p, badges: p.badges.map(b => ({ text: b.text, style: this.badgeStyle(b.kind) })) }));
+
+    const badges88 = [
+      { text: 'NETSCAPE NOW!', style: this.badge88('linear-gradient(180deg,#1a1a3a,#05051a)', '#9fd0ff', '#36e0ff') },
+      { text: 'MADE W/ NOTEPAD', style: this.badge88('linear-gradient(180deg,#0c2114,#04100a)', '#7dffb0', '#2bff88') },
+      { text: 'VALID HTML 4.0', style: this.badge88('linear-gradient(180deg,#2a1030,#100416)', '#ff9fe6', '#ff4dd2') },
+      { text: 'POWERED BY ☕', style: this.badge88('linear-gradient(180deg,#2a1f05,#140f02)', '#ffe08a', '#ffcc33') },
+      { text: '800×600 ZONE', style: this.badge88('linear-gradient(180deg,#0c2114,#04100a)', '#7dffb0', '#2bff88') },
+      { text: 'NO IE ALLOWED', style: this.badge88('linear-gradient(180deg,#2a0808,#140202)', '#ffb0b0', '#ff6b6b') },
+    ];
+
+    const THEME_META = [
+      { key: 'blue', title: 'Blue (default)' },
+      { key: 'green', title: 'Green' },
+      { key: 'red', title: 'Red' },
+      { key: 'purple', title: 'Purple' },
+    ];
+    const themeButtons = THEME_META.map(m => {
+      const active = this.state.theme === m.key;
+      const c = this.THEMES[m.key];
+      return {
+        title: m.title,
+        onClick: () => this.applyTheme(m.key),
+        style: 'width:24px;height:24px;border-radius:2px;cursor:pointer;display:inline-block;background:' + c.accent +
+          ';border:2px solid ' + (active ? '#ffffff' : 'rgba(255,255,255,0.22)') +
+          ';box-shadow:' + (active ? '0 0 12px ' + c.accent + ',0 0 4px rgba(255,255,255,0.6)' : 'none') +
+          ';transition:box-shadow .15s,border-color .15s',
+      };
+    });
+
+    return {
+      scanlines: this.props.scanlines ?? true,
+      themeButtons,
+      theme: this.state.theme,
+      setRootRef: this.setRootRef,
+      projects,
+      badges88,
+      guestbook: this.state.guestbook,
+      gbName: this.state.gbName,
+      gbMsg: this.state.gbMsg,
+      onGbName: this.onGbName,
+      onGbMsg: this.onGbMsg,
+      submitGuestbook: this.submitGuestbook,
+      visitorStr: this.fmtVisitor(this.state.visitors),
+      terminalOpen: this.state.terminalOpen,
+      terminalLines: this.state.terminalLines,
+      input: this.state.input,
+      snakeOn: this.state.view === 'snake',
+      shellOn: this.state.view === 'shell',
+      openTerminal: this.openTerminal,
+      closeTerminal: this.closeTerminal,
+      onBackdropClick: this.onBackdropClick,
+      stop: this.stop,
+      onTermChange: this.onTermChange,
+      onTermKey: this.onTermKey,
+      setLinesRef: this.setLinesRef,
+      setInputRef: this.setInputRef,
+      setSnakeCanvas: this.setSnakeCanvas,
+    };
+  }
+}
+</script>
+</body>
+</html>
