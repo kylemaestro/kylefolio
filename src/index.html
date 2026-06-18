@@ -26,6 +26,9 @@
   [data-retro-scroll]::-webkit-scrollbar-thumb:hover{background:#36e0ff}
   [data-retro-scroll]::-webkit-scrollbar-button{display:block;height:14px;background:var(--c-dim,#1f5896);border:1px solid #021008}
   @keyframes km-cursor{0%,49%{opacity:1}50%,100%{opacity:0}}
+  @keyframes km-rainbow{0%{background-position:0% 50%}100%{background-position:300% 50%}}
+  @keyframes km-rainbow-border{0%{border-color:#ff005d}16%{border-color:#ff7700}33%{border-color:#ffee00}50%{border-color:#00ff88}66%{border-color:#00cfff}83%{border-color:#b06bff}100%{border-color:#ff005d}}
+  @keyframes km-recblink{0%,100%{opacity:1}45%,55%{opacity:0.1}}
   @keyframes km-bob{0%,100%{transform:translateY(0)}50%{transform:translateY(-4px)}}
   ::selection{background:var(--c-accent,#2f9bff);color:#04140a}
   input::placeholder,textarea::placeholder{color:var(--c-dimtext,#4a7bb0)}
@@ -43,7 +46,7 @@
 
     <!-- ===================== BANNER ===================== -->
     <div style="text-align:center;border:3px double var(--c-accent,#2f9bff);background:linear-gradient(180deg,rgba(11,30,17,0.9),rgba(6,16,9,0.9));padding:26px 18px 20px;box-shadow:0 0 30px rgba(var(--c-rgb,47,155,255),0.18),inset 0 0 40px rgba(var(--c-rgb,47,155,255),0.05)">
-      <div style="font-family:'Press Start 2P',monospace;font-size:9px;color:#36e0ff;letter-spacing:2px;margin-bottom:16px;text-shadow:0 0 8px rgba(54,224,255,0.7)">★ ✦ &nbsp;C O M E &nbsp;O N &nbsp;I N , &nbsp;S T A Y &nbsp;A &nbsp;W H I L E &nbsp;!&nbsp; ✦ ★</div>
+      <div style="font-family:'Press Start 2P',monospace;font-size:11px;color:#36e0ff;letter-spacing:2px;margin-bottom:16px;text-shadow:0 0 8px rgba(54,224,255,0.7)">★ ✦ &nbsp;C O M E &nbsp;O N &nbsp;I N , &nbsp;S T A Y &nbsp;A &nbsp;W H I L E &nbsp;!&nbsp; ✦ ★</div>
       <h1 style="font-family:'Press Start 2P',monospace;font-size:clamp(20px,4.6vw,38px);line-height:1.35;margin:0;color:var(--c-accent,#2f9bff);text-shadow:0 0 12px rgba(var(--c-rgb,47,155,255),0.7),0 0 26px rgba(var(--c-rgb,47,155,255),0.3);letter-spacing:1px">KYLEMEISTER</h1>
       <div style="font-size:25px;margin-top:12px;color:var(--c-text2,#cfe9ff)">&gt; software developer · indie game dev · AI engineer_<span style="display:inline-block;width:11px;height:22px;background:var(--c-accent,#2f9bff);margin-left:2px;vertical-align:-3px;animation:km-cursor 1s step-end infinite"></span></div>
       <div style="margin-top:16px;font-size:23px;color:#ffcc33;text-shadow:0 0 10px rgba(255,204,51,0.5);animation:km-blink 1.1s step-end infinite">★ best viewed in Netscape Navigator 4.0 @ 800×600 ★</div>
@@ -51,7 +54,7 @@
 
     <!-- ===================== MARQUEE ===================== -->
     <div style="overflow:hidden;white-space:nowrap;border:2px solid var(--c-dim,#1f5896);border-top:none;background:#04100a;padding:7px 0;font-size:23px;color:var(--c-text,#9fd0ff)">
-      <span style="display:inline-block;animation:km-marquee 22s linear infinite;padding-left:100%">✦ thanks for visiting!! ✦ this page is under eternal construction ✦ sign my guestbook below ↓ ✦ psst — try the Konami code, or type &nbsp;ssh kyle@kylemeister.dev&nbsp; ✦ no IE allowed ✦ powered by coffee and Claude tokens ✦</span>
+      <span style="display:inline-block;animation:km-marquee 12s linear infinite;padding-left:100%">✦ thanks for visiting!! ✦ this page is under eternal construction ✦ sign my guestbook below ↓ ✦ psst — try the Konami code, or type &nbsp;ssh kyle@kylemeister.dev&nbsp; ✦ no IE allowed ✦ powered by coffee and Claude tokens ✦</span>
     </div>
 
     <!-- ===================== NAV ===================== -->
@@ -107,13 +110,13 @@
             <div style="font-family:'Press Start 2P',monospace;font-size:13px;color:var(--c-accent,#2f9bff);line-height:1.5;text-shadow:0 0 8px rgba(var(--c-rgb,47,155,255),0.4)">{{ project.name }}</div>
             <div style="display:flex;flex-wrap:wrap;gap:6px">
               <sc-for list="{{ project.badges }}" as="badge" hint-placeholder-count="1">
-                <span style="{{ badge.style }}">{{ badge.text }}</span>
+                <span style="{{ badge.style }}"><sc-if value="{{ badge.prefix }}"><span style="{{ badge.prefixStyle }}">{{ badge.prefix }}</span> </sc-if>{{ badge.text }}</span>
               </sc-for>
             </div>
             <div style="font-size:21px;color:var(--c-text2,#cfe9ff);flex:1;text-wrap:pretty">{{ project.desc }}</div>
             <div style="display:flex;flex-wrap:wrap;gap:8px;margin-top:2px">
               <sc-for list="{{ project.links }}" as="link" hint-placeholder-count="1">
-                <a href="{{ link.url }}" target="_blank" rel="noopener" style="text-decoration:none;border:1px solid #36e0ff;color:#36e0ff;font-size:19px;padding:3px 11px;background:rgba(54,224,255,0.06);transition:transform .14s ease,background .14s,color .14s;will-change:transform" style-hover="background:#36e0ff;color:#04140a;text-shadow:none;transform:translateY(-3px) scale(1.05);animation:km-btnglow .7s ease-in-out infinite">▸ {{ link.label }}</a>
+                <a href="{{ link.url }}" target="_blank" rel="noopener" style="text-decoration:none;border:1px solid #36e0ff;color:#36e0ff;font-size:19px;padding:3px 11px;background:rgba(54,224,255,0.06);transition:transform .14s ease,background .14s,color .14s;will-change:transform;display:inline-flex;align-items:center;gap:6px" style-hover="background:#36e0ff;color:#04140a;text-shadow:none;transform:translateY(-3px) scale(1.05);animation:km-btnglow .7s ease-in-out infinite"><sc-if value="{{ link.icon }}"><span style="font-family:'Press Start 2P',monospace;font-size:8px">{{ link.icon }}</span></sc-if><sc-if value="{{ !link.icon }}">▸ </sc-if>{{ link.label }}</a>
               </sc-for>
             </div>
           </div>
@@ -283,11 +286,35 @@ class Component extends DCLogic {
     let gb;
     try { gb = JSON.parse(localStorage.getItem('km_guestbook') || 'null'); } catch (e) { gb = null; }
     if (!Array.isArray(gb) || !gb.length) {
-      gb = [
+      const pool = [
+        { name: 'builder88', message: 'great site!! love the retro vibes. bookmarked.', date: '05/14/2002' },
+        { name: 'PumpUpTheParty21', message: 'YO THIS SITE GOES HARD!! bookmarking this forever', date: '09/08/2003' },
+        { name: 'tomoko42', message: 'found this from a webring. very cool!! adding to my links page ^_^', date: '07/23/2001' },
+        { name: 'TheReggieMan', message: 'reggie was here. sick terminal easter egg btw', date: '11/11/2004' },
+        { name: 'AdmiralLag69', message: 'ur ping is terrible but ur site is awesome lmao', date: '02/29/2000' },
+        { name: 'bmulligan88', message: 'signed!! hit me back on AIM: bmulligan88', date: '08/07/2003' },
         { name: 'xX_DarkRider_Xx', message: 'sick site dude!! check out my geocities page sometime', date: '08/14/1998' },
         { name: 'CyberSurfer99', message: 'FIRST!! also netscape > IE, fight me in the parking lot', date: '03/02/1999' },
         { name: 'webmaster_tim', message: 'added u to my webring :) keep on surfin the information superhighway', date: '11/27/1998' },
+        { name: 'MidnightCoderX', message: 'found this at 3am and honestly? no regrets. stay weird', date: '04/19/2001' },
+        { name: 'pixelwitch_777', message: 'the scanlines effect is *chef kiss*', date: '10/31/2002' },
+        { name: 'h4x0r_mike', message: 'i tried the konami code. not gonna say what happened', date: '06/06/2003' },
+        { name: 'noodlearms42', message: 'this is the most 1999 thing i have seen in 2024 and i love it', date: '01/01/2000' },
+        { name: 'GlitterFlopDisk', message: 'omg the under construction animation i am DECEASED', date: '12/25/2002' },
+        { name: 'turbo_pascal_fan', message: 'respect for the VT323 font choice. true terminal energy', date: '07/04/1999' },
+        { name: 'dial_up_dreamer', message: 'this page would take 45 seconds on 56k and it would be WORTH IT', date: '03/14/2000' },
+        { name: 'SgtPepperFloppy', message: 'played snake for 20 minutes instead of doing my homework. zero regrets', date: '09/09/2001' },
+        { name: 'e_claire_net', message: 'ur html is cleaner than my myspace page ever was', date: '05/05/2005' },
+        { name: 'ZaphodBeeblebrox_', message: 'mostly harmless. also great site. 42/10', date: '08/08/2004' },
+        { name: 'frogsong2001', message: 'i signed every guestbook in 2001. this is the best one yet', date: '06/17/2001' },
+        { name: 'QuantumToadstool', message: 'the caution tape animation lives rent free in my head now', date: '02/14/2003' },
+        { name: 'w3b_surfer_grl', message: 'linked from my livejournal!! hope you dont mind :3', date: '11/03/2002' },
+        { name: 'captain_404', message: 'page not found?? more like page VERY MUCH FOUND', date: '10/10/2003' },
+        { name: 'RetroByteKing', message: 'this is what the internet should have stayed', date: '04/01/2000' },
+        { name: 'sparklenet_gal', message: 'u should add a hit counter!! oh wait u already did lol', date: '07/07/2007' },
       ];
+      const shuffled = [...pool].sort(() => Math.random() - 0.5);
+      gb = shuffled.slice(0, 8);
     }
 
     this.setState({ visitors: v, guestbook: gb, terminalLines: this.welcome() });
@@ -664,9 +691,9 @@ class Component extends DCLogic {
     const base = "display:inline-block;font-family:'VT323',monospace;font-size:16px;line-height:1;letter-spacing:.5px;padding:4px 8px;border:1px solid;";
     const m = {
       os:    'color:#2bff88;border-color:#2bff88;background:rgba(43,255,136,0.08)',
-      live:  'color:#36e0ff;border-color:#36e0ff;background:rgba(54,224,255,0.10)',
-      alpha: 'color:#ffcc33;border-color:#ffcc33;background:rgba(255,204,51,0.10)',
-      star:  'color:#ff4dd2;border-color:#ff4dd2;background:rgba(255,77,210,0.10)',
+      live:  'background:linear-gradient(90deg,#ff005d,#ff7700,#ffee00,#00ff88,#00cfff,#b06bff,#ff005d) 0%/300%;-webkit-background-clip:text;background-clip:text;color:transparent;border-color:#b06bff;animation:km-rainbow 3s linear infinite,km-rainbow-border 3s linear infinite',
+      alpha: 'color:#ff4dd2;border-color:#ff4dd2;background:rgba(255,77,210,0.10)',
+      star:  'color:#ffcc33;border-color:#ffcc33;background:rgba(255,204,51,0.10)',
     };
     return base + (m[kind] || m.os);
   }
@@ -680,20 +707,25 @@ class Component extends DCLogic {
     const projects = [
       { name: 'Reddit Archiver', desc: 'CLI utility for backing up saved Reddit content — comments, posts, and images. Python, Reddit API, OAuth2 authorization flow.',
         badges: [{ text: 'OPEN-SOURCE', kind: 'os' }, { text: '30+ ⭐ ON GITHUB', kind: 'star' }],
-        links: [{ label: 'GitHub', url: 'https://github.com/' }] },
+        links: [{ label: 'GitHub', url: 'https://github.com/', icon: '>_' }] },
       { name: 'Flock and Load', desc: '2D action-strategy game inspired by Worms: Armageddon. Independently developed with Unity and C#. Releasing on Steam in 2025!',
         badges: [{ text: 'CLOSED-ALPHA', kind: 'alpha' }],
         links: [{ label: 'Steam Page', url: 'https://store.steampowered.com/' }] },
       { name: 'Codefolio', desc: 'This website! Built with React and Electron, hosted on a lightweight AWS Lightsail instance.',
         badges: [{ text: 'OPEN-SOURCE', kind: 'os' }],
-        links: [{ label: 'GitHub', url: 'https://github.com/' }, { label: 'Setup Guide', url: '#' }] },
+        links: [{ label: 'GitHub', url: 'https://github.com/', icon: '>_' }, { label: 'Setup Guide', url: '#' }] },
       { name: "Dinner's On You", desc: '2-player versus game inspired by Asteroids, built with old-school Java Applets. Players share a keyboard to pilot spaceships, lay mines, command battleships, and destroy the enemy base.',
         badges: [{ text: 'OPEN-SOURCE', kind: 'os' }],
-        links: [{ label: 'GitHub', url: 'https://github.com/' }] },
+        links: [{ label: 'GitHub', url: 'https://github.com/', icon: '>_' }] },
       { name: 'J-Answer', desc: 'AI-powered flashcard and study app.',
         badges: [{ text: 'LIVE', kind: 'live' }],
         links: [{ label: 'j-answer.kylemeister.dev', url: 'https://j-answer.kylemeister.dev/' }] },
-    ].map(p => ({ ...p, badges: p.badges.map(b => ({ text: b.text, style: this.badgeStyle(b.kind) })) }));
+    ].map(p => ({ ...p, badges: p.badges.map(b => {
+      const style = this.badgeStyle(b.kind);
+      const prefix = b.kind === 'live' ? '●' : null;
+      const prefixStyle = prefix ? 'color:#ff005d;animation:km-recblink 1.4s step-end infinite' : null;
+      return { text: b.text, style, prefix, prefixStyle };
+    }) }));
 
     const badges88 = [
       { text: 'NETSCAPE NOW!', style: this.badge88('linear-gradient(180deg,#1a1a3a,#05051a)', '#9fd0ff', '#36e0ff') },
