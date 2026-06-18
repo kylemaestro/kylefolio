@@ -85,7 +85,7 @@
           <img src="./uploads/profile.png" alt="Kyle Meister" style="flex:none;width:150px;height:150px;border:2px solid var(--c-dim,#1f5896);object-fit:cover;display:block" />
           <div style="flex:1;min-width:240px;font-size:23px;color:var(--c-text2,#cfe9ff)">
             <p style="margin:0 0 12px">Hey, I'm Kyle! I build fun software, ship enterprise-grade systems on AWS, develop games in my spare time, and use AI to ship code at-scale.</p>
-            <p style="margin:0">This page is a love letter to the whimsical, wild-west era of the web — so of course there are easter eggs! Sit back, relax, and check out my latest projects.</p>
+            <p style="margin:0">This page is a throwback to the whimsical, wild-west era of the web... so of course there are easter eggs! Sit back, relax, and check out my latest projects.</p>
           </div>
         </div>
         <div style="margin-top:20px;height:34px;border:1px solid #000;background:repeating-linear-gradient(45deg,#ffcc33,#ffcc33 16px,#1a1305 16px,#1a1305 32px);background-size:64px 100%;animation:km-caution 0.9s linear infinite;display:flex;align-items:center;justify-content:center">
@@ -530,9 +530,11 @@ class Component extends DCLogic {
         push([
           '1. Reddit Archiver   [open-source · 30+ ⭐]',
           '2. Flock and Load    [closed-alpha · Steam 2025]',
-          '3. Codefolio         [open-source · this site!]',
-          "4. Dinner's On You    [open-source · java applets]",
-          '5. J-Answer          [live · AI flashcards]',
+          '3. KyleFolio         [live · this site!]',
+          "4. Dinner's On You   [open-source · java applets]",
+          '5. j-answer          [live · AI flashcards]',
+          '6. Codefolio         [open-source · electron]',
+          '7. unity-2020-mcp    [open-source · unity fork]',
           '',
           'scroll up on the page to see the cards.',
         ]); break;
@@ -711,15 +713,21 @@ class Component extends DCLogic {
       { name: 'Flock and Load', desc: '2D action-strategy game inspired by Worms: Armageddon. Independently developed with Unity and C#. Releasing on Steam in 2025!',
         badges: [{ text: 'CLOSED-ALPHA', kind: 'alpha' }],
         links: [{ label: 'Steam Page', url: 'https://store.steampowered.com/' }] },
-      { name: 'Codefolio', desc: 'This website! Built with React and Electron, hosted on a lightweight AWS Lightsail instance.',
-        badges: [{ text: 'OPEN-SOURCE', kind: 'os' }],
-        links: [{ label: 'GitHub', url: 'https://github.com/', icon: '>_' }, { label: 'Setup Guide', url: '#' }] },
+      { name: 'KyleFolio', desc: 'This website! Built with Claude Design+Code and inspired by BRB Coffee in Austin, TX.',
+        badges: [{ text: 'LIVE', kind: 'live' }, { text: 'OPEN-SOURCE', kind: 'os' }],
+        links: [{ label: 'GitHub', url: 'https://github.com/kylemaestro/kylefolio', icon: '>_' }] },
       { name: "Dinner's On You", desc: '2-player versus game inspired by Asteroids, built with old-school Java Applets. Players share a keyboard to pilot spaceships, lay mines, command battleships, and destroy the enemy base.',
         badges: [{ text: 'OPEN-SOURCE', kind: 'os' }],
         links: [{ label: 'GitHub', url: 'https://github.com/', icon: '>_' }] },
-      { name: 'J-Answer', desc: 'AI-powered flashcard and study app.',
+      { name: 'j-answer', desc: 'AI-powered flashcard and study app.',
         badges: [{ text: 'LIVE', kind: 'live' }],
         links: [{ label: 'j-answer.kylemeister.dev', url: 'https://j-answer.kylemeister.dev/' }] },
+      { name: 'Codefolio', desc: 'Experimental Electron portfolio site deployed on Lightsail with the ChakraUI component library.',
+        badges: [{ text: 'OPEN-SOURCE', kind: 'os' }],
+        links: [{ label: 'GitHub', url: 'https://github.com/kylemaestro/codefolio', icon: '>_' }, { label: 'Setup Guide', url: '#' }] },
+      { name: 'unity-2020-mcp', desc: 'Custom fork of unity-mcp to backport Unity 2020.3f41 compatibility.',
+        badges: [{ text: 'OPEN-SOURCE', kind: 'os' }],
+        links: [{ label: 'GitHub', url: 'https://github.com/kylemaestro/unity-2020-mcp', icon: '>_' }] },
     ].map(p => ({ ...p, badges: p.badges.map(b => {
       const style = this.badgeStyle(b.kind);
       const prefix = b.kind === 'live' ? '●' : null;
